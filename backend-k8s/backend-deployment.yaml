@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kiwebackend
+spec:
+  selector:
+    matchLabels:
+      app: kiwe_backend
+  replicas: 1
+  template:
+    metadata:
+        name: nginx
+        labels:
+          app: kiwe_backend
+    spec:
+      containers:
+        - name: kiwe-backend
+          image: kiwe20/backend:v6
+          ports:
+            - containerPort: 8080

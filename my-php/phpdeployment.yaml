@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin-deployment
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+        - name: phpmyadmin
+          image: phpmyadmin/phpmyadmin
+          ports:
+            - containerPort: 80
+          env:
+            - name: PMA_HOST
+              value: kiwe-development.cl3xag9jshq1.eu-central-1.rds.amazonaws.com
+            - name: PMA_PORT
+              value: "3306"
+            - name: MEMORY_LIMIT
+              value: 512M
+            - name: UPLOAD_LIMIT
+              value: 1024M
